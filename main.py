@@ -51,7 +51,7 @@ Builder.load_string("""
 	Button:
 		pos_hint:{"x":0.5,"y":0.1}
 		text:"Login"
-		on_press: root.manager.current ='mainscreen'
+		on_press: root.manager.current ='newscreen'
 	 
 		
 
