@@ -2,6 +2,11 @@ from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 
+import cx_Oracle as ox
+
+conn = ox.connect("ADMIN/q2GWExrEGYz9JKM@db201902191526_low")
+
+
 
 Builder.load_string("""
 <whoscreen>:
@@ -166,7 +171,6 @@ Builder.load_string("""
 		pos_hint:{"x":0.5,"y":0.47}
 		multiline:False
 		password:True
-
 		
 <newscreen>:
     canvas:
@@ -188,7 +192,7 @@ Builder.load_string("""
 	    pos_hint:{"x":0.35,"y":0.4}
 	    text:"Show Pending"
 	    on_press: root.manager.current = 'datascreen'
-    
+
 <datascreen>:
     canvas:
         Rectangle:
@@ -200,7 +204,6 @@ Builder.load_string("""
 		pos_hint:{"x":0,"top":1}
 		text:"Back"
 		size_hint:0.2,0.08
-
 
 <mainscreen>:    
     canvas:
@@ -303,8 +306,7 @@ Builder.load_string("""
             text: 'Item C'
             size_hint_y: None
             height: '48dp'
-            on_release: dropdownproduct.select('Product C')
-    
+            on_release: dropdownproduct.select('Product C')    
 		
 <Button>:
 	color:1,1,1,1
@@ -312,23 +314,18 @@ Builder.load_string("""
 	size_hint:0.3,0.1
 """)
 
-
 class whoscreen(Screen):
     pass
-
 class retailerscreen(Screen):
     pass
 class executivescreen(Screen):
     pass
 class manufacturerscreen(Screen):
     pass
-
 class mainscreen(Screen):
     pass
-
 class newscreen(Screen):
     pass
-
 class datascreen(Screen):
      pass
 
