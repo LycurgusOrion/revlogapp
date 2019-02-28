@@ -1,0 +1,100 @@
+#: import main manufacturer
+#: import ListAdapter kivy.adapters.listadapter.ListAdapter
+#: import ListItemButton kivy.uix.listview.ListItemButton
+
+StudentDB:
+
+<StudentDB>:
+    orientation:"vertical"
+    f:f1
+    l:l1
+    s:s1
+    padding:10
+    spacing:10
+    Bubble:
+        size_hint_y: None
+        height: '48dp'
+
+        BubbleButton:
+            text: 'Dashboard'
+        BubbleButton:
+            text:'Log Out'
+
+    Accordion:
+        orientation:"horizontal"
+        height:'70dp'
+
+        AccordionItem:
+            title: 'Retailer'
+            ListView:
+                id:s2
+                adapter:
+                    ListAdapter(data=["Add", "Modify", "Delete"],cls=main.StudentListButton)
+
+
+        AccordionItem:
+            title: 'Executive'
+            ListView:
+                id:s3
+                adapter:
+                    ListAdapter(data=["Add", "Modify", "Delete"],cls=main.StudentListButton)
+        AccordionItem:
+            title: 'Requests'
+            ListView:
+                id:s4
+                adapter:
+                    ListAdapter(data=["Current", "Pending", "Completed"],cls=main.StudentListButton)
+
+
+        AccordionItem:
+            ListView:
+                id:s2
+                adapter:
+                    ListAdapter(data=["as","Home", "Work", "Other", "Not defined"],cls=main.StudentListButton)
+
+
+            Scatter:
+                id: scatter
+                size_hint: None, None
+                size: image.size
+                Image:
+                    id: image
+                    source: 'C:/Users/Manish/AppData/Local/Programs/Python/Python37-32/share/kivy-examples/demo/showcase/data/faust_github.jpg'
+                    size: self.texture_size
+
+    Spinner:
+
+        text: 'Home'
+        values: ('Home', 'Work', 'Other', 'Not defined')
+        size_hint_y: None
+        height: '48dp'
+
+
+
+
+    BoxLayout:
+        size_hint_y:None
+        height:"40dp"
+
+        Label:
+            text:"Product Name"
+        TextInput:
+            id:f1
+        Label:
+            text:"Product Id"
+        TextInput:
+            id:l1
+
+
+    BoxLayout:
+        size_hint_y:None
+        height:"40dp"
+
+        Button:
+            text:"a"
+            size_hint_x:5
+            on_press:root.a()
+    ListView:
+        id:s1
+        adapter:
+            ListAdapter(data=["as"],cls=main.StudentListButton)
