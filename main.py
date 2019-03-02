@@ -195,9 +195,9 @@ Builder.load_string("""
 	Button:
 	    pos_hint:{"x":0.35,"y":0.4}
 	    text:"Show Pending"
-	    on_press: root.manager.current = 'executivedatascreen'
+	    on_press: root.manager.current = 'retailerdatascreen'
 
-<executivedatascreen>:
+<retailerdatascreen>:
     canvas:
         Rectangle:
             source: 'abc.jpg'
@@ -358,7 +358,7 @@ class retailerscreen(Screen):
     pass
 class retailerchoicescreen(Screen):
     pass
-class executivedatascreen(Screen):
+class retailerdatascreen(Screen):
      pass
 
 class StudentListButton(Screen,ListItemButton):
@@ -375,7 +375,7 @@ sm.add_widget(distributerloginscreen(name='distributerloginscreen'))
 sm.add_widget(hulloginscreen(name='hulloginscreen'))
 sm.add_widget(retailerscreen(name='retailerscreen'))
 sm.add_widget(retailerchoicescreen(name='retailerchoicescreen'))
-sm.add_widget(executivedatascreen(name='executivedatascreen'))
+sm.add_widget(retailerdatascreen(name='retailerdatascreen'))
 sm.add_widget(manufacturerscreen(name='manufacturerscreen'))
 sm.add_widget(manufacturerscreen(name='StudentListButton'))
 
