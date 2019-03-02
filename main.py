@@ -1,14 +1,17 @@
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
-
-import cx_Oracle as ox
-
-conn = ox.connect("ADMIN/q2GWExrEGYz9JKM@db201902191526_low")
-
+from kivy.uix.boxlayout import BoxLayout
+from kivy.properties import ObjectProperty
+from kivy.uix.listview import ListItemButton
 
 
 Builder.load_string("""
+#: import main main
+#: import ListAdapter kivy.adapters.listadapter.ListAdapter
+#: import ListItemButton kivy.uix.listview.ListItemButton
+
+
 <whoscreen>:
     canvas:
         Rectangle:
@@ -21,21 +24,21 @@ Builder.load_string("""
 		font_size:30
 
 	Button:
-	    on_press: root.manager.current = 'retailerscreen'
+	    on_press: root.manager.current = 'retailerloginscreen'
 	    pos_hint:{"x":0.35,"y":0.6}
 	    text:"Retailer"
 
 	Button:
 	    pos_hint:{"x":0.35,"y":0.4}
 	    text:"Executive"
-	    on_press: root.manager.current = 'executivescreen'
+	    on_press: root.manager.current = 'executiveloginscreen'
 
 	Button:
 	    pos_hint:{"x":0.35,"y":0.2}
 	    text:"Manufacturer"
-	    on_press: root.manager.current = 'manufacturerscreen'
+	    on_press: root.manager.current = 'manufacturerloginscreen'
 
-<retailerscreen>:
+<retailerloginscreen>:
     canvas:
         Rectangle:
             source: 'abc.jpg'
@@ -56,7 +59,7 @@ Builder.load_string("""
 	Button:
 		pos_hint:{"x":0.5,"y":0.1}
 		text:"Login"
-		on_press: root.manager.current ='newscreen'
+		on_press: root.manager.current ='retailerchoicescreen'
 	 
 		
 
@@ -82,7 +85,7 @@ Builder.load_string("""
 		multiline:False
 		password:True
 
-<executivescreen>:
+<executiveloginscreen>:
     canvas:
         Rectangle:
             source: 'abc.jpg'
@@ -127,7 +130,7 @@ Builder.load_string("""
 		multiline:False
 		password:True
 
-<manufacturerscreen>:
+<manufacturerloginscreen>:
     canvas:
         Rectangle:
             source: 'abc.jpg'
@@ -147,6 +150,7 @@ Builder.load_string("""
 	Button:
 		pos_hint:{"x":0.5,"y":0.1}
 		text:"Login"
+		on_press:root.manager.current='manufacturerscreen'
 	 
 		
 
@@ -171,41 +175,41 @@ Builder.load_string("""
 		pos_hint:{"x":0.5,"y":0.47}
 		multiline:False
 		password:True
-		
-<newscreen>:
+
+<retailerchoicescreen>:
     canvas:
         Rectangle:
             source: 'abc.jpg'
             pos: self.pos  
             size: self.size
     Button:
-	    on_press: root.manager.current = 'retailerscreen'	    
+	    on_press: root.manager.current = 'retailerloginscreen'	    
 		pos_hint:{"x":0,"top":1}
 		text:"Back"
 		size_hint:0.2,0.08
     Button:
-	    on_press: root.manager.current = 'mainscreen'
+	    on_press: root.manager.current = 'retailerscreen'
 	    pos_hint:{"x":0.35,"y":0.6}
 	    text:"Generate New"
 
 	Button:
 	    pos_hint:{"x":0.35,"y":0.4}
 	    text:"Show Pending"
-	    on_press: root.manager.current = 'datascreen'
+	    on_press: root.manager.current = 'executivedatascreen'
 
-<datascreen>:
+<executivedatascreen>:
     canvas:
         Rectangle:
             source: 'abc.jpg'
             pos: self.pos  
             size: self.size
     Button:
-	    on_press: root.manager.current = 'newscreen'	    
+	    on_press: root.manager.current = 'retailerchoicescreen'	    
 		pos_hint:{"x":0,"top":1}
 		text:"Back"
 		size_hint:0.2,0.08
 
-<mainscreen>:    
+<retailerscreen>:    
     canvas:
         Rectangle:
             source: 'abc.jpg'
@@ -213,7 +217,7 @@ Builder.load_string("""
             size: self.size
 
     Button:
-	    on_press: root.manager.current = 'retailerscreen'
+	    on_press: root.manager.current = 'retailerloginscreen'
 	    on_press:btn.text="Select brand:"
 	    on_press:btn2.text="Select product:"
         on_press:quantityinput.text=""	    
@@ -241,7 +245,7 @@ Builder.load_string("""
 		
 	Button:
 	    text: 'Submit'
-	    on_press: root.manager.current = 'newscreen'
+	    on_press: root.manager.current = 'retailerchoicescreen'
         pos_hint:{"x":0.7,"y":0.15}
         size_hint_y: None
         height: '48dp'
@@ -306,7 +310,35 @@ Builder.load_string("""
             text: 'Item C'
             size_hint_y: None
             height: '48dp'
-            on_release: dropdownproduct.select('Product C')    
+            on_release: dropdownproduct.select('Product C')  
+            
+<manufacturerscreen>:
+    orientation:"vertical"
+    padding:10
+    spacing:10
+    canvas:
+        Rectangle:
+            source: 'abc.jpg'
+            pos: self.pos  
+            size: self.size
+  		
+    Bubble:
+        size_hint_y: None
+        height: '48dp'
+        pos_hint:{"x":0,"top":1}
+            
+        BubbleButton:
+            text: 'Dashboard'
+            
+        BubbleButton:
+            text: 'Logout'
+            on_press:root.manager.current='manufacturerloginscreen'
+                
+        BubbleButton:
+            text: 'Help'
+         
+       
+      
 		
 <Button>:
 	color:1,1,1,1
@@ -316,28 +348,37 @@ Builder.load_string("""
 
 class whoscreen(Screen):
     pass
+class retailerloginscreen(Screen):
+    pass
+class executiveloginscreen(Screen):
+    pass
+class manufacturerloginscreen(Screen):
+    pass
 class retailerscreen(Screen):
     pass
-class executivescreen(Screen):
+class retailerchoicescreen(Screen):
     pass
+class executivedatascreen(Screen):
+     pass
+
+class StudentListButton(Screen,ListItemButton):
+    pass
+
 class manufacturerscreen(Screen):
     pass
-class mainscreen(Screen):
-    pass
-class newscreen(Screen):
-    pass
-class datascreen(Screen):
-     pass
 
 
 sm = ScreenManager()
 sm.add_widget(whoscreen(name='whoscreen'))
+sm.add_widget(retailerloginscreen(name='retailerloginscreen'))
+sm.add_widget(executiveloginscreen(name='executiveloginscreen'))
+sm.add_widget(manufacturerloginscreen(name='manufacturerloginscreen'))
 sm.add_widget(retailerscreen(name='retailerscreen'))
-sm.add_widget(executivescreen(name='executivescreen'))
+sm.add_widget(retailerchoicescreen(name='retailerchoicescreen'))
+sm.add_widget(executivedatascreen(name='executivedatascreen'))
 sm.add_widget(manufacturerscreen(name='manufacturerscreen'))
-sm.add_widget(mainscreen(name='mainscreen'))
-sm.add_widget(newscreen(name='newscreen'))
-sm.add_widget(datascreen(name='datascreen'))
+sm.add_widget(manufacturerscreen(name='StudentListButton'))
+
 
 
 class TestApp(App):
