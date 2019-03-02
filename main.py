@@ -30,13 +30,13 @@ Builder.load_string("""
 
 	Button:
 	    pos_hint:{"x":0.35,"y":0.4}
-	    text:"Executive"
-	    on_press: root.manager.current = 'executiveloginscreen'
+	    text:"Distributer"
+	    on_press: root.manager.current = 'distributerloginscreen'
 
 	Button:
 	    pos_hint:{"x":0.35,"y":0.2}
-	    text:"Manufacturer"
-	    on_press: root.manager.current = 'manufacturerloginscreen'
+	    text:"Hul"
+	    on_press: root.manager.current = 'hulloginscreen'
 
 <retailerloginscreen>:
     canvas:
@@ -85,7 +85,7 @@ Builder.load_string("""
 		multiline:False
 		password:True
 
-<executiveloginscreen>:
+<distributerloginscreen>:
     canvas:
         Rectangle:
             source: 'abc.jpg'
@@ -130,7 +130,7 @@ Builder.load_string("""
 		multiline:False
 		password:True
 
-<manufacturerloginscreen>:
+<hulloginscreen>:
     canvas:
         Rectangle:
             source: 'abc.jpg'
@@ -332,7 +332,7 @@ Builder.load_string("""
             
         BubbleButton:
             text: 'Logout'
-            on_press:root.manager.current='manufacturerloginscreen'
+            on_press:root.manager.current='hulloginscreen'
                 
         BubbleButton:
             text: 'Help'
@@ -350,9 +350,9 @@ class whoscreen(Screen):
     pass
 class retailerloginscreen(Screen):
     pass
-class executiveloginscreen(Screen):
+class distributerloginscreen(Screen):
     pass
-class manufacturerloginscreen(Screen):
+class hulloginscreen(Screen):
     pass
 class retailerscreen(Screen):
     pass
@@ -371,8 +371,8 @@ class manufacturerscreen(Screen):
 sm = ScreenManager()
 sm.add_widget(whoscreen(name='whoscreen'))
 sm.add_widget(retailerloginscreen(name='retailerloginscreen'))
-sm.add_widget(executiveloginscreen(name='executiveloginscreen'))
-sm.add_widget(manufacturerloginscreen(name='manufacturerloginscreen'))
+sm.add_widget(distributerloginscreen(name='distributerloginscreen'))
+sm.add_widget(hulloginscreen(name='hulloginscreen'))
 sm.add_widget(retailerscreen(name='retailerscreen'))
 sm.add_widget(retailerchoicescreen(name='retailerchoicescreen'))
 sm.add_widget(executivedatascreen(name='executivedatascreen'))
