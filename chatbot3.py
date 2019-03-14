@@ -1,94 +1,51 @@
 from nltk.chat.util import Chat, reflections
+from random import randint
 
 pairs = [
     [
         r"hello|hi|hey(.*)",
-        ["Hello, What is your name ?", ]
-    ],
-    [
-        r"what is your name ?",
-        ["My name is Chitti and I'm a chatbot ", ]
-    ],
-[
-        r"(.*)(.*)",
-        ["okay and ", ]
-    ],
-    [
-        r"how are you ?",
-        ["I'm doing good\nHow about You ?", ]
-    ],
-    [
-        r"sorry (.*)",
-        ["Its alright", "Its OK, never mind", ]
-    ],
-    [
-        r"i'm (.*) doing good",
-        ["Nice to hear that", "Alright :)", ]
-    ],
-    [
-        r"hi|hey|hello",
-        ["Hello", "Hey there", ]
-    ],
-    [
-        r"(.*) age?",
-        ["I'm a computer program dude\nSeriously you are asking me this?", ]
-
-    ],
-    [
-        r"what (.*) want ?",
-        ["Make me an offer I can't refuse", ]
-
-    ],
-    [
-        r"(.*) created ?",
-        ["Nagesh created me using Python's NLTK library ", "top secret ;)", ]
-    ],
-    [
-        r"(.*) (location|city) ?",
-        ['Chennai, Tamil Nadu', ]
-    ],
-    [
-        r"(.*)is(.*) weather(.*)?",
-        ["Weather in %1 is awesome like always", "Too hot man here in %1", "Too cold man here in %1",
-         "Never even heard about %1"]
-    ],
-    [
-        r"i work in (.*)?",
-        ["%1 is an Amazing company, I have heard about it. But they are in huge loss these days.", ]
-    ],
-    [
-        r"(.*)raining(.*)",
-        ["No rain since last week here in %2", "Damn its raining too much here in %2"]
-    ],
-    [
-        r"how (.*) health(.*)",
-        ["I'm a computer program, so I'm always healthy ", ]
-    ],
-    [
-        r"(.*) (sports|game) (.*)?",
-        ["I'm a very big fan of Football", ]
-    ],
-    [
-        r"who (.*) sportsperson ?",
-        ["Messy", "Ronaldo", "Roony"]
-    ],
-    [
-        r"who (.*) (moviestar|actor)(.*)?",
-        ["Brad Pitt"]
+        ["Hello, how may we help you?", ]
     ],
 
     [
-        r"quit",
+        r"(.*) want (.*) return (.*) goods",
+        ["Are the goods damaged or expired?"]
+    ],
+    [ 
+        r"(.*) damaged",
+        ["Please select- 1.On shelf Damage , 2. Cutomer Damage, 3. Transportation Damage"]
+
+    ],
+    [
+        r"damaged",
+        ["Please select- 1.On shelf Damage , 2. Cutomer Damage, 3. Transportation Damage"]
+    ],
+    [
+        r"1(.*)|2(.*)|3(.*)" ,
+        ["Please send us a picture of the damaged product your request ID is "+ str(randint(1, 3500))+". We will reach back to you as soon as possible."]
+    ],
+    [
+        r"(.*)expired(.*)",
+        ["Thankyou for reporting, your request ID is "+ str(randint(1, 3500))+" we will send a salesman to pick it up as soon as possible."]
+    ],
+
+    [
+        r"okay",
         ["BBye take care. See you soon :) ", "It was nice talking to you. See you soon :)"]
-    ],
+    ]  ,
+    [
+        r"(.*)",
+        [
+            " Hi!Do you want to send damaged or expired goods?" 
+        ]
+    ]
+
 ]
+# def chatty():
+#     print("Hi, I'm Chitti and I chat alot ;)\nPlease type lowercase English language to start a conversation. Type quit to leave ")  # default message at the start
 
 
-def chatty():
-    print("Hi, I'm Chitti and I chat alot ;)\nPlease type lowercase English language to start a conversation. Type quit to leave ")  # default message at the start
-
-
-chat = Chat(pairs, reflections)
-chat.converse()
-if __name__ == "__main__":
-    chatty()
+# # chat = Chat(pairs, reflections)
+# # chat.converse()
+# if __name__ == "__main__":
+#     chatty()
